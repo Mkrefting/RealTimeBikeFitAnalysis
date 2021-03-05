@@ -1,3 +1,3 @@
 # RealTimeBikeFitAnalysis
 
-Live Body Pose Detection and Analysis app for bike fitting. 
+About: Live Video Stream Body Pose Detection and Analysis App for Bike Fitting. 
