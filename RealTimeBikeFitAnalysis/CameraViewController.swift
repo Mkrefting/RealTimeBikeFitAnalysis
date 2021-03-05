@@ -10,10 +10,12 @@ import UIKit
 import AVFoundation
 
 final class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+    
     private var captureSession: AVCaptureSession! = AVCaptureSession()
     private lazy var previewLayer: AVCaptureVideoPreviewLayer = {
         let preview = AVCaptureVideoPreviewLayer(session:self.captureSession)
-        preview.videoGravity = .resizeAspect
+        preview.videoGravity = .resizeAspect    // experiment with .resizeAspectFill
+        preview.connection?.videoOrientation = .landscapeRight
         return preview
     }()
     private let videoOutput = AVCaptureVideoDataOutput()
@@ -39,7 +41,6 @@ final class CameraViewController: UIViewController, AVCaptureVideoDataOutputSamp
 
     func addPreviewLayer(){
         previewLayer.frame = CGRect(x:0, y:0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
-        previewLayer.videoGravity = .resizeAspectFill
         self.view.layer.addSublayer(previewLayer)
     }
     
@@ -74,7 +75,7 @@ final class CameraViewController: UIViewController, AVCaptureVideoDataOutputSamp
         // process image here
     }
 
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {return .portrait}
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {return .landscapeRight}
     
 }
 
