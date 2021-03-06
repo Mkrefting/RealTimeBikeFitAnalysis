@@ -14,7 +14,7 @@
 		505DDBFF25EEED310020558E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 505DDBFE25EEED310020558E /* Preview Assets.xcassets */; };
 		505DDC0A25EEED320020558E /* RealTimeBikeFitAnalysisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505DDC0925EEED320020558E /* RealTimeBikeFitAnalysisTests.swift */; };
 		505DDC1525EEED320020558E /* RealTimeBikeFitAnalysisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505DDC1425EEED320020558E /* RealTimeBikeFitAnalysisUITests.swift */; };
-		507F84A325F129380093D53A /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507F84A225F129380093D53A /* CameraViewController.swift */; };
+		507F84A325F129380093D53A /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507F84A225F129380093D53A /* CameraController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +48,7 @@
 		505DDC1025EEED320020558E /* RealTimeBikeFitAnalysisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RealTimeBikeFitAnalysisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		505DDC1425EEED320020558E /* RealTimeBikeFitAnalysisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeBikeFitAnalysisUITests.swift; sourceTree = "<group>"; };
 		505DDC1625EEED320020558E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		507F84A225F129380093D53A /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		507F84A225F129380093D53A /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +102,7 @@
 				505DDBF725EEED2F0020558E /* RealTimeBikeFitAnalysisApp.swift */,
 				505DDBF925EEED2F0020558E /* ContentView.swift */,
 				505AA97F25F3C8920001B691 /* CameraView.swift */,
-				507F84A225F129380093D53A /* CameraViewController.swift */,
+				507F84A225F129380093D53A /* CameraController.swift */,
 				505DDBFB25EEED310020558E /* Assets.xcassets */,
 				505DDC0025EEED310020558E /* Info.plist */,
 				505DDBFD25EEED310020558E /* Preview Content */,
@@ -265,7 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				507F84A325F129380093D53A /* CameraViewController.swift in Sources */,
+				507F84A325F129380093D53A /* CameraController.swift in Sources */,
 				505DDBFA25EEED2F0020558E /* ContentView.swift in Sources */,
 				505DDBF825EEED2F0020558E /* RealTimeBikeFitAnalysisApp.swift in Sources */,
 				505AA98025F3C8920001B691 /* CameraView.swift in Sources */,

@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 import AVFoundation
 
-final class CameraViewController: UIViewController {
+final class CameraController: UIViewController {
     
     // MARK: View Controller Life Cycle
     
@@ -106,10 +106,16 @@ final class CameraViewController: UIViewController {
         
         session.commitConfiguration()
     }
+    
+    // MARK: Video Recording
+    func startRecording(){
+        // TO DO
+        print("Start Recording")
+    }
 }
 
 // MARK: Process Image Frames
-extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput,
                        didOutput sampleBuffer: CMSampleBuffer,
                        from connection: AVCaptureConnection) {
@@ -121,16 +127,34 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 }
 
-extension CameraViewController: UIViewControllerRepresentable {
+struct CameraControllerView: UIViewControllerRepresentable {
 
-    public typealias UIViewControllerType = CameraViewController
-
-    func makeUIViewController(context: UIViewControllerRepresentableContext<CameraViewController>) -> CameraViewController {
-        
-        return CameraViewController()
+    // TO DO - get camerview to talk to cameracontroller via cameracontrollerview
+    
+    
+    @Binding var startRecording: Bool
+    public typealias UIViewControllerType = CameraController
+/*
+    func makeCoordinator() -> CameraControllerView.Coordinator{
+        Coordinator(self)
+    }
+*/
+    func makeUIViewController(context: UIViewControllerRepresentableContext<CameraControllerView>) -> CameraController {
+        return CameraController()
     }
     
-    func updateUIViewController(_ uiViewController: CameraViewController, context: UIViewControllerRepresentableContext<CameraViewController>) {
-        
+    func updateUIViewController(_ cameraController: CameraController, context: UIViewControllerRepresentableContext<CameraControllerView>) {
+        /*if startRecording{
+            cameraController.startRecording()
+            startRecording = false
+        }
+    }
+    
+    class Coordinator: NSObject{
+        var parent: CameraControllerView
+        init(_ parent: CameraControllerView){
+            self.parent = parent
+        }
+    }*/
     }
 }

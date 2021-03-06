@@ -9,11 +9,17 @@ import SwiftUI
 
 // To contain all UI specific to the camera
 struct CameraView: View {
-        
+    
+    @State private var startRecording: Bool = false
+    
     var body: some View {
         ZStack{
-            // recording button
-            CameraViewController()
+            CameraControllerView(startRecording: $startRecording)
+
+            // To do - add fancy recording button!
+            Button("Start Recording", action: {
+                startRecording = true
+            })
         }
         
     }
