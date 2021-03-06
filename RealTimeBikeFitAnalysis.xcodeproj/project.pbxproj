@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		505AA98025F3C8920001B691 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505AA97F25F3C8920001B691 /* CameraView.swift */; };
 		505DDBF825EEED2F0020558E /* RealTimeBikeFitAnalysisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505DDBF725EEED2F0020558E /* RealTimeBikeFitAnalysisApp.swift */; };
 		505DDBFA25EEED2F0020558E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505DDBF925EEED2F0020558E /* ContentView.swift */; };
 		505DDBFC25EEED310020558E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 505DDBFB25EEED310020558E /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		505AA97F25F3C8920001B691 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		505DDBF425EEED2F0020558E /* RealTimeBikeFitAnalysis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealTimeBikeFitAnalysis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		505DDBF725EEED2F0020558E /* RealTimeBikeFitAnalysisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeBikeFitAnalysisApp.swift; sourceTree = "<group>"; };
 		505DDBF925EEED2F0020558E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			children = (
 				505DDBF725EEED2F0020558E /* RealTimeBikeFitAnalysisApp.swift */,
 				505DDBF925EEED2F0020558E /* ContentView.swift */,
+				505AA97F25F3C8920001B691 /* CameraView.swift */,
 				507F84A225F129380093D53A /* CameraViewController.swift */,
 				505DDBFB25EEED310020558E /* Assets.xcassets */,
 				505DDC0025EEED310020558E /* Info.plist */,
@@ -265,6 +268,7 @@
 				507F84A325F129380093D53A /* CameraViewController.swift in Sources */,
 				505DDBFA25EEED2F0020558E /* ContentView.swift in Sources */,
 				505DDBF825EEED2F0020558E /* RealTimeBikeFitAnalysisApp.swift in Sources */,
+				505AA98025F3C8920001B691 /* CameraView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

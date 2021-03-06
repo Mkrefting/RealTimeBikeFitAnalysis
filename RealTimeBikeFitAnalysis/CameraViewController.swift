@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 final class CameraViewController: UIViewController {
-
+    
     // MARK: View Controller Life Cycle
     
     override func viewDidLoad() {
@@ -39,7 +39,6 @@ final class CameraViewController: UIViewController {
         sessionQueue.async{
             self.configureSession()
         }
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,10 +61,13 @@ final class CameraViewController: UIViewController {
     
     // MARK: Session Management
     
+    // Start Capture Session
     private var session = AVCaptureSession()
     
     // Communicate with the session and other session objects on this queue
     private let sessionQueue = DispatchQueue(label: "session queue")
+    // Seperate queue for video processing
+    private let videoQueue = DispatchQueue(label: "video queue")
 
     private lazy var previewLayer: AVCaptureVideoPreviewLayer = {
         let preview = AVCaptureVideoPreviewLayer(session:self.session)
@@ -73,50 +75,37 @@ final class CameraViewController: UIViewController {
         preview.connection?.videoOrientation = .landscapeRight
         return preview
     }()
+    
     private let videoOutput = AVCaptureVideoDataOutput()
     
     // MARK: ConfigureSession
     // To be called on the session queue
     private func configureSession(){
         session.beginConfiguration()
-        self.addVideoInput()
-        self.addPreviewLayer()
-        self.addVideoOutput()
-        session.commitConfiguration()
-    }
-    
-    func addVideoInput(){
-        // 0. Set session preset (video quality) - lower is better for ml model efficiency
-        // 1. Find input
+        // To do: Set session preset (video quality) - lower is better for ml model efficiency
+        
+        // Add video device input
         let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes:[.builtInTrueDepthCamera,.builtInDualCamera,.builtInWideAngleCamera], mediaType:.video, position:.back)
-        guard let videoDevice = discoverySession.devices.first else {
-            print("Error: Video device is unavailable")
-            return
-        }
-        // 2. Get input
-        let videoInput: AVCaptureDeviceInput
-        do {videoInput = try AVCaptureDeviceInput(device: videoDevice)
-        } catch {
-            print("Error: Video device input is unavailable")
-            return
-        }
-        // 3. Add input
+        guard let videoDevice = discoverySession.devices.first else {return}
+        guard let videoInput = try? AVCaptureDeviceInput(device: videoDevice) else {return}
         if (self.session.canAddInput(videoInput)){
             self.session.addInput(videoInput)
         } else {return}
-    }
-
-    func addPreviewLayer(){
+        
+        // Add preview layer to be shown in UI
         previewLayer.frame = CGRect(x:0, y:0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
         self.view.layer.addSublayer(previewLayer)
+        
+        // Add video output
+        if self.session.canAddOutput(self.videoOutput){
+            self.session.addOutput(self.videoOutput)
+            self.videoOutput.alwaysDiscardsLateVideoFrames = true
+            self.videoOutput.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as NSString) : NSNumber(value: kCVPixelFormatType_32BGRA)] as [String : Any] // check docs, it has a different line here
+            self.videoOutput.setSampleBufferDelegate(self, queue: videoQueue)
+        } else {return}
+        
+        session.commitConfiguration()
     }
-    
-    func addVideoOutput(){
-        self.videoOutput.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as NSString) : NSNumber(value: kCVPixelFormatType_32BGRA)] as [String : Any]
-        self.videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "my.image.handling.queue"))
-        self.session.addOutput(self.videoOutput)
-    }
-
 }
 
 // MARK: Process Image Frames
