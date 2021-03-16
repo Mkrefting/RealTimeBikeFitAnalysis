@@ -14,8 +14,8 @@ struct CameraView: View {
     
     var body: some View {
         ZStack{
-            CameraControllerView(startRecording: $startRecording)
-
+            //CameraControllerView(startRecording: $startRecording)
+            PoseView()
             // To do - add fancy recording button!
             Button("Start Recording", action: {
                 startRecording = true

@@ -5,10 +5,13 @@
 //  Created by Max Krefting on 04/03/2021.
 //
 
+/*
 import SwiftUI
 import UIKit
 import AVFoundation
+import Vision
 
+@available(iOS 14.0, *)
 final class CameraController: UIViewController {
     
     // MARK: View Controller Life Cycle
@@ -39,6 +42,10 @@ final class CameraController: UIViewController {
         sessionQueue.async{
             self.configureSession()
         }
+        
+        setupLayers()
+        setupVision()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,6 +85,8 @@ final class CameraController: UIViewController {
     
     private let videoOutput = AVCaptureVideoDataOutput()
     
+    var bufferSize: CGSize = .zero // size of video buffer
+    
     // MARK: ConfigureSession
     // To be called on the session queue
     private func configureSession(){
@@ -85,7 +94,8 @@ final class CameraController: UIViewController {
         // To do: Set session preset (video quality) - lower is better for ml model efficiency
         
         // Add video device input
-        let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes:[.builtInTrueDepthCamera,.builtInDualCamera,.builtInWideAngleCamera], mediaType:.video, position:.back)
+        // For testing - changed position to front - so can see how the camera is analysing poses
+        let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes:[.builtInTrueDepthCamera,.builtInDualCamera,.builtInWideAngleCamera], mediaType:.video, position:.front)
         guard let videoDevice = discoverySession.devices.first else {return}
         guard let videoInput = try? AVCaptureDeviceInput(device: videoDevice) else {return}
         if (self.session.canAddInput(videoInput)){
@@ -104,6 +114,18 @@ final class CameraController: UIViewController {
             self.videoOutput.setSampleBufferDelegate(self, queue: videoQueue)
         } else {return}
         
+        let captureConnection = videoOutput.connection(with:.video)
+        captureConnection?.isEnabled = true
+        do{
+            try videoDevice.lockForConfiguration()
+            let dimensions = CMVideoFormatDescriptionGetDimensions(videoDevice.activeFormat.formatDescription)
+            bufferSize.width = CGFloat(dimensions.width)
+            bufferSize.height = CGFloat(dimensions.height)
+            videoDevice.unlockForConfiguration()
+        } catch{
+            print(error.localizedDescription)
+        }
+        
         session.commitConfiguration()
     }
     
@@ -112,6 +134,45 @@ final class CameraController: UIViewController {
         // TO DO
         print("Start Recording")
     }
+    
+    // MARK: Pose Analysis
+    private var poseOverlay: CALayer! = nil
+    private var requests = [VNRequest]() // array of vision requests to process
+    private let bodyPoseDetectionMinConfidence: VNConfidence = 0.6
+    private let bodyPoseRecognisedPointMidConfidence: VNConfidence = 0.1
+    
+    func setupLayers(){
+        poseOverlay = CALayer()
+        poseOverlay.bounds = CGRect(x:0.0,
+                                    y:0.0,
+                                    width: bufferSize.width,
+                                    height: bufferSize.height) // set the layer to cover the whole video buffer size
+        view.layer.insertSublayer(poseOverlay,above:previewLayer) // insert pose overlay on top of camera preview layer
+    }
+    
+    func setupVision(){
+        // declare request with callback when it is done
+        let poseRequest = VNDetectHumanBodyPoseRequest{(request,error) in
+            guard error == nil else{
+                print(error!.localizedDescription)
+                return
+            }
+            DispatchQueue.main.async{ // update UI on main thread
+                if let results = request.results{
+                    self.handleVisionResults(results)
+                }
+            }
+        }
+        self.requests = [poseRequest]
+        
+    }
+    
+    func handleVisionResults(_ results: [Any]){
+        print(results)
+        // add observation to poseOverlay
+        return
+    }
+
 }
 
 // MARK: Process Image Frames
@@ -119,9 +180,19 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput,
                        didOutput sampleBuffer: CMSampleBuffer,
                        from connection: AVCaptureConnection) {
-        guard let frame = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+        
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             debugPrint("unable to get image from sample buffer")
             return
+        }
+        
+        let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:])
+        do{
+            try requestHandler.perform(self.requests)
+        }
+        catch{
+            print("Unable to perform the request: \(error)")
+            print(error.localizedDescription)
         }
         // process image here
     }
@@ -158,3 +229,4 @@ struct CameraControllerView: UIViewControllerRepresentable {
     }*/
     }
 }
+*/

@@ -15,6 +15,8 @@
 		505DDC0A25EEED320020558E /* RealTimeBikeFitAnalysisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505DDC0925EEED320020558E /* RealTimeBikeFitAnalysisTests.swift */; };
 		505DDC1525EEED320020558E /* RealTimeBikeFitAnalysisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505DDC1425EEED320020558E /* RealTimeBikeFitAnalysisUITests.swift */; };
 		507F84A325F129380093D53A /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507F84A225F129380093D53A /* CameraController.swift */; };
+		76123C8F2600C9EC00A19F61 /* VideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76123C8E2600C9EC00A19F61 /* VideoCapture.swift */; };
+		76123C942600CAB100A19F61 /* PoseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76123C932600CAB100A19F61 /* PoseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		505DDC1425EEED320020558E /* RealTimeBikeFitAnalysisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeBikeFitAnalysisUITests.swift; sourceTree = "<group>"; };
 		505DDC1625EEED320020558E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		507F84A225F129380093D53A /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		76123C8E2600C9EC00A19F61 /* VideoCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCapture.swift; sourceTree = "<group>"; };
+		76123C932600CAB100A19F61 /* PoseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,8 @@
 				505DDBF925EEED2F0020558E /* ContentView.swift */,
 				505AA97F25F3C8920001B691 /* CameraView.swift */,
 				507F84A225F129380093D53A /* CameraController.swift */,
+				76123C8E2600C9EC00A19F61 /* VideoCapture.swift */,
+				76123C932600CAB100A19F61 /* PoseViewController.swift */,
 				505DDBFB25EEED310020558E /* Assets.xcassets */,
 				505DDC0025EEED310020558E /* Info.plist */,
 				505DDBFD25EEED310020558E /* Preview Content */,
@@ -266,6 +272,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				507F84A325F129380093D53A /* CameraController.swift in Sources */,
+				76123C942600CAB100A19F61 /* PoseViewController.swift in Sources */,
+				76123C8F2600C9EC00A19F61 /* VideoCapture.swift in Sources */,
 				505DDBFA25EEED2F0020558E /* ContentView.swift in Sources */,
 				505DDBF825EEED2F0020558E /* RealTimeBikeFitAnalysisApp.swift in Sources */,
 				505AA98025F3C8920001B691 /* CameraView.swift in Sources */,
@@ -515,6 +523,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8Q2HV75JY9;
 				INFOPLIST_FILE = RealTimeBikeFitAnalysisUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -535,6 +544,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8Q2HV75JY9;
 				INFOPLIST_FILE = RealTimeBikeFitAnalysisUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
